@@ -59,16 +59,27 @@ class sumofBT{
         } return root;
     }
 
-    public static int sumofBT(Node node){
-        if(node == null){
-            return 0;
-        }
-
-        int lsum = sumofBT(node.left);
-        int rsum = sumofBT(node.right);
-
-        int osum = lsum + rsum + node.data;
-        return osum;
+    public static int sumofBT(Node node)
+    {
+            Queue<Node> q = new LinkedList<Node>(); 
+            q.add(root);
+             Node temp;
+            int sum=0;
+            int size=0;
+            while (q.size()>0)  
+            {  
+                size=q.size();// if there are some null nodes also in any level to manage that size will the num of nodes in any given level
+                for(int i=0;i<size;i++)
+                {
+                    temp=q.remove();  //current level working node
+                    sum=sum+temp.data;
+                    if (temp.left != null) //if left child is present or not
+                    q.add(temp.left); 
+                    if (temp.right != null)  //if right child is present or not
+                    q.add(temp.right);  
+                } 
+            }
+        return(sum);
     }
 
     public static void main(String[] args){
